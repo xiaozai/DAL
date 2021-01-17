@@ -156,9 +156,9 @@ class DiMP(BaseTracker):
         im = numpy_to_torch(image)
         im_d=numpy_to_torch(depth)
 
-        print('frame_num : ', self.frame_num)
-        print('im shape : ', im.shape)
-        print('im_d shape : ', im_d.shape)
+        # print('frame_num : ', self.frame_num)
+        # print('im shape : ', im.shape)
+        # print('im_d shape : ', im_d.shape)
         self.flag='noaction'
         self.valid_d=True
         self.dimpfail_thistime=False
@@ -174,7 +174,6 @@ class DiMP(BaseTracker):
 
             # Extract classification features
             test_x = self.get_classification_features(backbone_feat)
-            print('Song in dimp.py : line 175, test_x : ', test_x.shape)
 
             # Location of sample
             sample_pos, sample_scales = self.get_sample_location(sample_coords)
@@ -369,11 +368,9 @@ class DiMP(BaseTracker):
         learning_rate = getattr(self.params, 'hard_negative_learning_rate', None) if hard_negative else None
         goodscore_flag = self.score_map.max()>=self.params.threshold_allowupdateclassifer
 
-        print('Song in dimp.py line 371: test_x : ', test_x.shape)
         if (getattr(self.params, 'update_classifier', False) and self.frame_num<=self.params.update_classifier_initial) or \
          (getattr(self.params, 'update_classifier', False) and update_flag and goodscore_flag and self.redetection_mode==False and self.valid_d):
             # Get train sample
-            print('Song in dimp.py line 375, test_x : ', test_x.shape)
             train_x = test_x[scale_ind:scale_ind+1, ...]
 
             # Create target_box and label for spatial sample
@@ -515,8 +512,6 @@ class DiMP(BaseTracker):
 
         depthcnn_online=self.net.settings.depthaware_for_classiferonline
         alpha=self.net.settings.depthaware_alpha
-        print('Song : what is the depthaware for classifieronline : ')
-        print(self.net.settings.depthaware_for_classiferonline)
         if depths is not None:
             with torch.no_grad():
                 scores = self.net.classifier.depthaware_classify(self.target_filter, sample_x, depths, alpha)
