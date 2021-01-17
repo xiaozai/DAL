@@ -74,6 +74,10 @@ class DiMPnet(nn.Module):
         # train_depths=train_imgs[:,:,3,:,:].clone().view(*train_imgs.shape[:2],1,*train_imgs.shape[3:]).repeat(1,1,3,1,1)
         # test_depths =test_imgs[:,:,3,:,:].clone().view(*test_imgs.shape[:2],1,*test_imgs.shape[3:]).repeat(1,1,3,1,1)
         #print([train_depths.shape, test_depths.shape])
+        '''
+
+        Song : when evaluation, using this model
+        '''
         train_rgbs, train_depths  =train_imgs[:,:,:3,:,:],train_imgs[:,:,3,:,:]
         test_rgbs,  test_depths   =test_imgs[:,:,:3,:,:] ,test_imgs[:,:,3,:,:]
         # train_depths = train_depths.view(*train_imgs.shape[:2],1,*train_imgs.shape[3:]).expand(-1,-1,3,-1,-1)

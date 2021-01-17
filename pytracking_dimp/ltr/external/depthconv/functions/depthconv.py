@@ -27,7 +27,7 @@ def depth_conv(input,
                   stride=1,
                   padding=0,
                   dilation=1):
-
+    print('Song in ltr.external.depthconv.functions.depthconv.py : depth_conv ')
     if input is not None and input.dim() != 4:
         raise ValueError(
             "Expected 4D tensor as input, got {}D tensor instead.".format(

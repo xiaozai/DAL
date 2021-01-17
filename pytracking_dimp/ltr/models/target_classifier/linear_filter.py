@@ -88,18 +88,19 @@ class LinearFilter(nn.Module):
         # Extract features
         train_feat = self.extract_classification_feat(train_feat, num_sequences)
         test_feat = self.extract_classification_feat(test_feat, num_sequences)
-
+        print('Song in ltr.models.target_classifier.line_filter.py Line 91, before get_filter ..')
         # Train filter
         #if self.settings.
         filter, filter_iter, losses = self.get_filter(train_feat, train_bb, train_depths, test_depths, *args, **kwargs)
 
 
         if self.settings.depthaware_for_classiferonline:
+            print('Song in ltr.models.target_classifier.line_filter.py Line 98, before depthaware_classify')
             test_depths=F.upsample(test_depths, size=(test_feat.shape[3],test_feat.shape[4]), mode='bilinear')
             test_depths=test_depths.view(test_depths.shape[0], test_depths.shape[1], 1, test_depths.shape[2], test_depths.shape[3])#([3, 4, 1, 18, 18])
             filter=filter.view(1, filter.shape[0], filter.shape[1], filter.shape[2], filter.shape[3])
             filter_iter=[f.view(1, f.shape[0], f.shape[1], f.shape[2], f.shape[3]) for f in filter_iter]#([1, 4, 512, 4, 4]) for each
-            test_scores = [self.depthaware_classify(f, test_feat, test_depths, self.settings.depthaware_alpha) for f in filter_iter]
+            test_scores = [self.depthaware_classify(f, test_feat, test_depths, self.settings.depthaware_alpha) for f in filter_iter] # Song !!!!! alpha in Eq.3
 
         else:
             # Classify samples using all return filters
@@ -127,7 +128,7 @@ class LinearFilter(nn.Module):
 
     def depthaware_classify(self, weights, feat, depth, alpha):
         """Run classifier (filter) on the features (feat)."""
-
+        print('Song ltr.models.target_classifier.line_filter.py Line 131, in depthaware_classify before filter_layer.applyfilter_depthware ...')
         if feat.shape[2]!=depth.shape[2] or feat.shape[2]!=depth.shape[2]:
             depth=F.upsample(depth, size=(feat.shape[2],feat.shape[3]),mode='bilinear')
         #print('depthaware_classify',feat.shape, depth.shape)

@@ -90,7 +90,7 @@ class DiMPnet_rgbd_blend1(nn.Module):
         train_feat_iou = self.get_backbone_bbreg_feat(train_feat)
         test_feat_iou = self.get_backbone_bbreg_feat(test_feat)
 
-
+        print('Song in ltr.models.tracking.dimpnet_rgbd_blend1.py Line 93, before classifier ...')
 
         # Run classifier module
         # if self.settings.depthaware_for_classiferonline:
@@ -112,6 +112,7 @@ class DiMPnet_rgbd_blend1(nn.Module):
 
         #Run the IoUNet module
         if self.settings.depthaware_for_iounet:
+            print('Song in ltr.models.tracking.dimpnet_rgbd_blend1.')
             iou_pred = self.bb_regressor.forward_depthaware(train_feat_iou, test_feat_iou, train_bb, test_proposals,train_depths, test_depths)
         else:
             iou_pred = self.bb_regressor(train_feat_iou, test_feat_iou, train_bb, test_proposals)
@@ -229,14 +230,14 @@ def dimpnet50(filter_size=1, optim_iter=5, optim_init_step=1.0, optim_init_reg=0
                                                     mask_init_factor=mask_init_factor,
                                                     score_act=score_act, act_param=act_param, mask_act=target_mask_act,
                                                     detach_length=detach_length)
-
+    print('Song in ltr.models.tracking.DiMPnet_rgbd_blend1.py line 233, before classifier, target_clf.LinearFilter ...')
     # The classifier module
     classifier = target_clf.LinearFilter(settings=settings,filter_size=filter_size, filter_initializer=initializer,
                                          filter_optimizer=optimizer,
                                          feature_extractor=clf_feature_extractor)
     # Bounding box regressor for rgb
     bb_regressor = bbmodels.AtomIoUNet(settings=settings, input_dim=(4*128,4*256), pred_input_dim=iou_input_dim, pred_inter_dim=iou_inter_dim)
-
+    print('Song in ltr.models.tracking.DiMPnet_rgbd_blend1.py line 240, dimpnet50 model_constructor ...')
     # DiMP network
     net = DiMPnet_rgbd_blend1(settings=settings, feature_extractor=backbone_net,classifier=classifier, bb_regressor=bb_regressor,
                   classification_layer=classification_layer, bb_regressor_layer=['layer2', 'layer3'])

@@ -40,6 +40,8 @@ class NetConstructor:
 
     def get(self):
         """ Rebuild the network by calling the network function with the correct arguments. """
+        print('Song in ltr.admin.model_constructor: fun_module : ', self.fun_module)
+        print('Song in ltr.admin.model_constructor: fun_name : ', self.fun_name)
         net_module = importlib.import_module(self.fun_module)
         net_fun = getattr(net_module, self.fun_name)
         return net_fun(*self.args, **self.kwds)

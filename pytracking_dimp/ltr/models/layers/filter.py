@@ -42,7 +42,7 @@ def apply_filter_depthaware(feat, filter, depth, alpha):
         scores: Output of filtering. Dimensions (images_in_sequence, sequences, yH, yW) or (images_in_sequence, sequences,1,yH,yW)
     """
     from ltr.external.depthconv.functions import depth_conv
-
+    print('Song in ltr.models.layers.filter : apply_filter_depthaware ...')
     multiple_filters = (feat.dim() == 5)
     padding = (filter.shape[-2] // 2, filter.shape[-1] // 2)
     num_images = feat.shape[0]

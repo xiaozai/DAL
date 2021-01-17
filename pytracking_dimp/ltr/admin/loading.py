@@ -55,11 +55,14 @@ def load_network(network_dir=None, checkpoint=None, constructor_fun_name=None, c
         if 'constructor' in checkpoint_dict and checkpoint_dict['constructor'] is not None:
             net_constr = checkpoint_dict['constructor']
             if constructor_fun_name is not None:
+                print('Song in ltr.admin.loading.py: line 58, constructor_fun_name = ', constructor_fun_name)
                 net_constr.fun_name = constructor_fun_name
             if constructor_module is not None:
+                print('Song in ltr.admin.loading.py: line 61, constructor_module = ', constructor_module)
                 net_constr.fun_module = constructor_module
             for arg, val in kwargs.items():
                 if arg in net_constr.kwds.keys():
+                    print('Song in ltr.admin.loading.py: line 65, net_constr.kwds.keys() arg = ', arg)
                     net_constr.kwds[arg] = val
                 else:
                     print('WARNING: Keyword argument "{}" not found when loading network.'.format(arg))

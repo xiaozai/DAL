@@ -97,6 +97,9 @@ class PrincetonRGBD(BaseDataset):
         return os.path.join(self.root, class_name)
 
     def get_sequence_info(self, seq_id):
+        '''
+        Song : frmae_path is wrong for PTB
+        '''
         seq_path = self._get_sequence_path(seq_id)
         bbox = self._read_anno(seq_id)
         #target_visible = self._read_target_visible(seq_path, anno)
@@ -111,8 +114,10 @@ class PrincetonRGBD(BaseDataset):
         # visible = self._read_target_visible(seq_path) & valid.byte()
         # return {'bbox': bbox, 'valid': valid, 'visible': visible}
 
+    # def _get_frame_path(self, seq_path, frame_id):
+    #     return os.path.join(seq_path, 'color/Color_{:08}.png'.format(frame_id))    # frames start from 0
     def _get_frame_path(self, seq_path, frame_id):
-        return os.path.join(seq_path, 'color/Color_{:08}.png'.format(frame_id))    # frames start from 0
+        return os.path.join(seq_path, 'rgb/Color_{:08}.png'.format(frame_id))    # frames start from 0
 
     def _get_frame(self, seq_path, frame_id):
         #print(self._get_frame_path(seq_path, frame_id))

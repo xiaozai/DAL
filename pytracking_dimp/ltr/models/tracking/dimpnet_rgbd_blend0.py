@@ -17,7 +17,7 @@ import ltr.admin.settings as ws_settings
 settings = ws_settings.Settings()
 
 settings.depthaware_for_classiferonline=True
-settings.depthaware_for_classifer_init=False
+settings.depthaware_for_classifer_init=False               # Song : Differences between dimpnet_rgbd_blend0 and blend1
 settings.depthaware_for_classifer_optimizer=False
 settings.depthaware_for_iounet=True
 settings.depthaware_alpha=0.1

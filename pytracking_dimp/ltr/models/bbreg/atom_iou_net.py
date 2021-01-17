@@ -162,7 +162,7 @@ class AtomIoUNet(nn.Module):
             feat2:  Features from the test frames (4 or 5 dims).
             bb1:  Target boxes (x,y,w,h) in image coords in the reference samples. Dims (images, sequences, 4).
             proposals2:  Proposal boxes for which the IoU will be predicted (images, sequences, num_proposals, 4)."""
-
+        print('Song in ltr.models.bbreg.atom_iou_net.py : line 165, forward_depthaware ...')
         assert bb1.dim() == 3
         self.train_depths=train_depths
         self.test_depths =test_depths
