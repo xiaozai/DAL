@@ -23,10 +23,11 @@ We use the same settings as the [Pytracking](https://github.com/visionml/pytrack
 ```
 python run_tracker.py dimp_rgbd_blend dimp50_votd --dataset votd --sequence 'bottle_room_occ_1' --debug 3
 ```
+- **Results** (Here)[https://github.com/xiaozai/DAL-Results.git]
+
 # Train
-```
-python run_training.py dimp dimp50_rgbd_blend
-```
+- no needs to train on RGBD dataset
+- we pretrain the dimp50 on RGB datasets, then inference on RGBD datasets
 
 If you use this code, please cite our paper (the bibtex will be updated soon after ICPR2020):
 ```
