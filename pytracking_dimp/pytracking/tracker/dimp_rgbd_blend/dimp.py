@@ -16,6 +16,7 @@ class DiMP(BaseTracker):
 
     def initialize_features(self):
         if not getattr(self, 'features_initialized', False):
+            print('Song in pytracking.tracker.dimp_rgbd_blend.dimp.py line 19, initialize_features ..')
             self.params.net.initialize()
         self.features_initialized = True
 
@@ -29,7 +30,7 @@ class DiMP(BaseTracker):
         self.initialize_features()
 
         # The DiMP network
-        self.net = self.params.net
+        self.net = self.params.net # ltr.models.tracking.dimpnet
 
         # Convert image
         im = numpy_to_torch(image)
@@ -895,6 +896,7 @@ class DiMP(BaseTracker):
         #print(x.shape, depths.shape, target_boxes.shape)
         # Get target filter by running the discriminative model prediction module
         with torch.no_grad():
+            print('Song in pytracking.tracker.dimp_rgbd_blend.dimp.py line 899, initialize_classifier ...')
             self.target_filter, _, losses = self.net.classifier.get_filter(x, target_boxes, depths, None, num_iter=num_iter,
                                                                            compute_losses=plot_loss)
             import os

@@ -77,6 +77,8 @@ class DiMPnet(nn.Module):
         '''
 
         Song : when evaluation, using this model
+        In the pytracking
+        python run_tracker.py  dimp_rgbd_blend dimp50_votd.py xxx
         '''
         train_rgbs, train_depths  =train_imgs[:,:,:3,:,:],train_imgs[:,:,3,:,:]
         test_rgbs,  test_depths   =test_imgs[:,:,:3,:,:] ,test_imgs[:,:,3,:,:]
