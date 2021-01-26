@@ -31,10 +31,11 @@ python run_tracker.py dimp_rgbd_blend dimp50_votd --dataset votd --sequence 'bot
 
 If you use this code, please cite our paper (the bibtex will be updated soon after ICPR2020):
 ```
-@inproceedings{qian2019dal,
-  author    = {Qian, Yanlin and Yan, Song and Luke{\v{z}}i{\v{c}}, Alan and Kristan, Matej and K{\"a}m{\"a}r{\"a}inen, Joni-Kristian and Matas, Jiri},
-  title     = {DAL--A Deep Depth-aware Long-term Tracker},
-  booktitle = {25th International Conference on Pattern Recognition, {ICPR} 2020, Milan, Italy, January 10-15, 2020},
-  year      = {2020},
+@INPROCEEDINGS{Qian-2020-icpr,
+  author = {Y. Qian and S. Yan and A. Lukezic and M. Kristan and J.-K. K{\"a}m{\"a}r{\"a}inen and J. Matas},
+  title = {{DAL}: A Deep Depth-Aware Long-term Tracker},
+  booktitle = {Int. Conf. on Pattern Recognition (ICPR)},
+  year = {2020},
+  address = {Milano, Italy (online)}
 }
 ```
