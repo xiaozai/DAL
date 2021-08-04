@@ -16,7 +16,6 @@ class DiMP(BaseTracker):
 
     def initialize_features(self):
         if not getattr(self, 'features_initialized', False):
-            print('Song in pytracking.tracker.dimp_rgbd_blend.dimp.py line 19, initialize_features ..')
             self.params.net.initialize()
         self.features_initialized = True
 
@@ -357,7 +356,6 @@ class DiMP(BaseTracker):
                 self.target_scale_redetection=self.first_target_scale
                 self.target_scale=self.first_target_scale
                 self.redetection_mode=False
-
         # ------- end for redetection module ------- #
 
 
@@ -371,19 +369,22 @@ class DiMP(BaseTracker):
 
         if (getattr(self.params, 'update_classifier', False) and self.frame_num<=self.params.update_classifier_initial) or \
          (getattr(self.params, 'update_classifier', False) and update_flag and goodscore_flag and self.redetection_mode==False and self.valid_d):
-            # Get train sample
-            train_x = test_x[scale_ind:scale_ind+1, ...]
+            try:
+                # Get train sample
+                train_x = test_x[scale_ind:scale_ind+1, ...]
 
-            # Create target_box and label for spatial sample
-            target_box = self.get_iounet_box(self.pos, self.target_sz, sample_pos[scale_ind,:], sample_scales[scale_ind])
+                # Create target_box and label for spatial sample
+                target_box = self.get_iounet_box(self.pos, self.target_sz, sample_pos[scale_ind,:], sample_scales[scale_ind])
 
-            # Get the train depth
-            train_depths = patches_d
-            if train_x.shape[2]!=train_depths.shape[2] or train_x.shape[3]!=train_depths.shape[3]:
-                train_depths=F.upsample(train_depths, size=(train_x.shape[2], train_x.shape[3]), mode='bilinear')
+                # Get the train depth
+                train_depths = patches_d
+                if train_x.shape[2]!=train_depths.shape[2] or train_x.shape[3]!=train_depths.shape[3]:
+                    train_depths=F.upsample(train_depths, size=(train_x.shape[2], train_x.shape[3]), mode='bilinear')
 
-            # Update the classifier model
-            self.update_classifier(train_x, target_box, train_depths, learning_rate, s[scale_ind,...])
+                # Update the classifier model
+                self.update_classifier(train_x, target_box, train_depths, learning_rate, s[scale_ind,...])
+            except:
+                pass
 
         # Set the pos of the tracker to iounet pos
         if getattr(self.params, 'use_iou_net', True) and self.flag != 'not_found' and hasattr(self, 'pos_iounet') and self.redetection_mode==False and self.valid_d:

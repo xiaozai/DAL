@@ -21,6 +21,7 @@ from pytracking.evaluation.ptbdataset import PTBDataset
 from pytracking.evaluation.laval_6d_dataset import Laval6dDataset
 from pytracking.evaluation.stcdataset import STCDataset
 from pytracking.evaluation.votddataset import VOTDDataset
+from pytracking.evaluation.depthtrackdataset import DepthTrackDataset
 
 
 
@@ -70,6 +71,8 @@ def run_tracker(tracker_name, tracker_param, run_id=None, dataset_name='otb', se
         dataset = Laval6dDataset()
     elif dataset_name == 'votd':
         dataset = VOTDDataset()
+    elif dataset_name == 'depthtrack':
+        dataset = DepthTrackDataset()
     else:
         raise ValueError('Unknown dataset name')
 

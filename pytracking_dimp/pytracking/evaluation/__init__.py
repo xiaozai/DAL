@@ -15,3 +15,4 @@ from .tracker import Tracker
 from .ptbdataset import PTBDataset
 from .laval_6d_dataset import Laval6dDataset
 from .votddataset import VOTDDataset
+from .depthtrackdataset import DepthTrackDataset
